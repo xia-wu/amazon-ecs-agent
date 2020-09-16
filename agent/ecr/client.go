@@ -52,7 +52,7 @@ func NewECRClient(sdkClient ECRSDK) ECRClient {
 
 // GetAuthorizationToken calls the ecr api to get the docker auth for the specified registry
 func (client *ecrClient) GetAuthorizationToken(registryId string) (*ecrapi.AuthorizationData, error) {
-	log.Debugf("Calling GetAuthorizationToken for %q", registryId)
+	log.Infof("Calling GetAuthorizationToken for %q", registryId)
 
 	output, err := client.sdkClient.GetAuthorizationToken(&ecrapi.GetAuthorizationTokenInput{
 		RegistryIds: []*string{aws.String(registryId)},

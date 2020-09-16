@@ -16,6 +16,7 @@ package dockerauth
 import (
 	"encoding/base64"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 
@@ -139,8 +140,8 @@ func (authProvider *ecrAuthProvider) getAuthConfigFromECR(image string, key cach
 	if err != nil {
 		return types.AuthConfig{}, err
 	}
-
-	log.Debugf("Calling ECR.GetAuthorizationToken for %s", image)
+	log.Infof("ECS_LOGLEVEL: %s", os.Getenv("ECS_LOGLEVEL"))
+	log.Infof("ECS_LOGLEVEL_ON_INSTANCE: %s", os.Getenv("ECS_LOGLEVEL_ON_INSTANCE"))
 	ecrAuthData, err := client.GetAuthorizationToken(authData.RegistryID)
 	if err != nil {
 		return types.AuthConfig{}, err
